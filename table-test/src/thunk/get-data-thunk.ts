@@ -6,7 +6,7 @@ import { setCurrentGoods } from '../store/allSlice';
 
 import { AppThunk } from '../services/store-types';
 import {
-  TCategoryData, TFullDataCategory, TPhotos, TSuppliersId,
+  TCategoryData, TPhotos, TSuppliersId,
 } from '../services/types';
 
 const getDataThunk: AppThunk = () => async (dispatch) => {
@@ -18,13 +18,11 @@ const getDataThunk: AppThunk = () => async (dispatch) => {
     const photos: AxiosResponse<TPhotos> = await axios.post(`${baseUrl}/cards_photo`, {
       nm_ids: suppliersId.data,
     });
-    const FullDataCategory = goods.data.map((el, index) => {
-      const obj = mockData[index];
-
+    const FullDataCategory = goods.data.map((el) => {
       const photo = photos.data[el.id];
-      return { ...el, ...obj, photo };
+      const priceU = el.priceU / 100;
+      return { ...el, priceU ,mockData, photo };
     });
-      console.log(FullDataCategory)
     dispatch(setCurrentGoods(FullDataCategory));
   } catch (error) {
     console.log(error);

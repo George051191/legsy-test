@@ -21,6 +21,5 @@ export type TPhotos = { [key: string]: string };
 
 export type TFullDataCategory = TCategoryData & {
   photo: string,
-  date: string,
-  amount: number,
+  mockData: Record<string, number | string >[]
 };

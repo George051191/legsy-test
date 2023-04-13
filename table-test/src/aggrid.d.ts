@@ -1,0 +1,1 @@
+declare module '@ag-grid-enterprise/sparklines';
